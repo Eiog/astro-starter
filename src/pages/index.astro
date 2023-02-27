@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Counter from '../components/Counter.vue';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -32,6 +33,9 @@ import Card from '../components/Card.astro';
 				body="Come say hi to our amazing Discord community. ❤️"
 			/>
 		</ul>
+    <Counter client:visible>
+      <h1>Hello, Vue!</h1>
+    </Counter>
 	</main>
 </Layout>
 
