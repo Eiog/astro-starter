@@ -26,7 +26,8 @@
       ]
     },
     "types": [
-      "@astrojs/image/client"
+      "@astrojs/image/client",
+      "vite-plugin-pwa/info"
     ]
   },
   "include": [
