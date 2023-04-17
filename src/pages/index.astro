@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 import Counter from "../components/Counter.vue";
+import Hello from "~/components/Hello.astro";
 import i18next, { t, changeLanguage } from "i18next";
 import { LanguageSelector, Trans } from "astro-i18next/components";
 
@@ -41,6 +42,7 @@ changeLanguage("cn");
       <h1>Hello, Vue!</h1>
     </Counter>
     <p>{t("welcome")}</p>
+    <Hello/>
     <LanguageSelector showFlag={true} />
 	</main>
 </Layout>
