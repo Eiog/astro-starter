@@ -3,7 +3,7 @@ import { pwaInfo } from 'virtual:pwa-info';
 export interface Props {
 	title: string;
 }
-
+const buildDate = __DATE__;
 const { title } = Astro.props;
 ---
 
@@ -24,7 +24,12 @@ const { title } = Astro.props;
     <script src="/src/pwa.ts"></script>
 	</head>
 	<body>
-		<slot />
+    <main>
+      <slot />
+    </main>
+    <footer>
+      Built at: { buildDate }
+    </footer>
 	</body>
 </html>
 <style is:global>
@@ -39,5 +44,10 @@ const { title } = Astro.props;
 	code {
 		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
 			Bitstream Vera Sans Mono, Courier New, monospace;
+	}
+  main {
+		margin: auto;
+		padding: 1.5rem;
+		max-width: 60ch;
 	}
 </style>

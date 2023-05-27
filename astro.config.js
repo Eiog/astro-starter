@@ -97,6 +97,10 @@ export default defineConfig({
   output: 'server',
   adapter: envAdapter(),
   vite: {
+    logLevel: 'info',
+    define: {
+      __DATE__: `'${new Date().toISOString()}'`,
+    },
     plugins: [
       createSvgIconsPlugin({
         iconDirs: [resolve(process.cwd(), 'src/icons')],
