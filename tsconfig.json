@@ -32,6 +32,13 @@
       "vite-plugin-svg-icons/client"
     ]
   },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/*.astro"
+  ],
   "exclude": [
     "node_modules",
     "dist"
