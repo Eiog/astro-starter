@@ -27,7 +27,6 @@
     },
     "types": [
       "vitest/globals",
-      "@astrojs/image/client",
       "vite-plugin-pwa/info",
       "vite-plugin-svg-icons/client"
     ]
