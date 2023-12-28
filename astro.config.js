@@ -49,7 +49,6 @@ export default defineConfig({
         'vue',
       ],
       dirs: ['src/hooks', 'src/composables', 'src/stores', 'src/utils'],
-      dts: 'src/typings/auto-import.d.ts',
       vueTemplate: true,
     }),
     // https://vite-pwa-org.netlify.app/frameworks/astro.html
