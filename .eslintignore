@@ -1,8 +1,0 @@
-dist
-dist-ssr
-dist-electron
-dev-dist
-release
-src-tauri
-.vercel
-node_modules

@@ -1,0 +1,33 @@
+---
+import i18next from 'i18next'
+const path = Astro.url.pathname
+console.log(path)
+---
+
+<toggle-language
+  data-languages={i18next.languages}
+  data-language={i18next.language}
+>
+  <i
+    class="i-ri-translate cursor-pointer text-xl transition-colors dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400"
+  ></i>
+</toggle-language>
+<script>
+  class ToggleLanguage extends HTMLElement {
+    constructor() {
+      super()
+
+      // 从 data（数据）属性中读取消息。
+      const languages = this.dataset.languages?.split(',')
+      const language = this.dataset.language
+      const button = this.querySelector('i')
+      if (button)
+        button.addEventListener('click', () => {
+          console.log(language)
+          console.log(languages)
+        })
+    }
+  }
+
+  customElements.define('toggle-language', ToggleLanguage)
+</script>

@@ -1,0 +1,93 @@
+<toggle-dark-mode>
+  <i
+    class="cursor-pointer text-xl transition-colors dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 i-ri-sun-fill"
+  ></i>
+</toggle-dark-mode>
+<script>
+  class ToggleDarkMode extends HTMLElement {
+    constructor() {
+      super()
+      const isAppearanceTransition =
+        typeof document !== 'undefined' &&
+        // @ts-expect-error: Transition API
+        document.startViewTransition &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      /**
+       * Credit to [@hooray](https://github.com/hooray)
+       * @see https://github.com/vuejs/vitepress/pull/2347
+       */
+      function toggleDark(event: MouseEvent, isDark: boolean, cb?: () => void) {
+        if (!isAppearanceTransition || !event) {
+          if (cb) cb()
+          return
+        }
+
+        const x = event.clientX
+        const y = event.clientY
+        const endRadius = Math.hypot(
+          Math.max(x, innerWidth - x),
+          Math.max(y, innerHeight - y),
+        )
+        // @ts-expect-error: Transition API
+        const transition = document.startViewTransition(async () => {
+          if (cb) cb()
+          await new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(true)
+            }, 100)
+          })
+        })
+
+        transition.ready.then(() => {
+          const clipPath = [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ]
+          document.documentElement.animate(
+            {
+              clipPath: isDark ? [...clipPath].reverse() : clipPath,
+            },
+            {
+              duration: 400,
+              easing: 'ease-in',
+              pseudoElement: isDark
+                ? '::view-transition-old(root)'
+                : '::view-transition-new(root)',
+            },
+          )
+        })
+      }
+      const theme = localStorage.getItem('__ASTRO_THEME__')
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark')
+        this.querySelector('i')?.classList.add('i-ri-moon-fill')
+      } else {
+        document.documentElement.classList.remove('dark')
+        this.querySelector('i')?.classList.add('i-ri-sun-fill')
+      }
+      const button = this.querySelector('i')
+      if (button)
+        button.addEventListener('click', (e) => {
+          const theme = localStorage.getItem('__ASTRO_THEME__')
+          if (theme === 'dark') {
+            toggleDark(e, false, () => {
+              localStorage.setItem('__ASTRO_THEME__', 'light')
+              document.documentElement.classList.remove('dark')
+              button.classList.remove('i-ri-moon-fill')
+              button.classList.add('i-ri-sun-fill')
+            })
+          } else {
+            toggleDark(e, true, () => {
+              localStorage.setItem('__ASTRO_THEME__', 'dark')
+              document.documentElement.classList.add('dark')
+              button.classList.remove('i-ri-sun-fill')
+              button.classList.add('i-ri-moon-fill')
+            })
+          }
+        })
+    }
+  }
+
+  customElements.define('toggle-dark-mode', ToggleDarkMode)
+</script>

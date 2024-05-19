@@ -1,0 +1,13 @@
+---
+import BackToHome from './BackToHome.astro'
+import GitHub from './GitHub.astro'
+import ToggleLanguage from '~/components/ToggleLanguage.astro'
+import ToggleDarkMode from '~/components/ToggleDarkMode.astro'
+---
+
+<nav class="w-screen-md flex-y-center justify-end gap-3 <md:w-full <md:p-x-3">
+  <BackToHome />
+  <ToggleDarkMode />
+  <ToggleLanguage />
+  <GitHub />
+</nav>

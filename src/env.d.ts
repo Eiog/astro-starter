@@ -6,3 +6,12 @@ declare namespace App {
 
   }
 }
+declare const __DATE__: string
+interface ImportMetaEnv {
+  readonly ASTRO_APP_NAME: string
+  readonly ASTRO_APP_DESCRIPTION: string
+  readonly ASTRO_DEV_PORT: string
+}
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
